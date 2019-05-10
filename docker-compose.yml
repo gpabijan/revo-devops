@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  # nestJS backend listening on port 3000
+  backend:
+    build: ./
+    volumes:
+      - ./src/:/app/src
+    ports:
+      - 3000:3000
+    links:
+      - postgres
+    command: npm run start:dev
+
+  # mysql service listening on port 3306, username root, password empty
+  postgres:
+    container_name: PostgreTestsClock
+    image: postgres:10-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+      - POSTGRES_DB=revolut
+    volumes:
+      - ./docker-volumes/postgresql:/var/lib/postgresql
