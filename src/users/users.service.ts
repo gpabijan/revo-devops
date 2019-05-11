@@ -2,6 +2,7 @@ import {Injectable} from '@nestjs/common';
 import {User} from './entity/user.entity';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
+import {CreateResponseDTO} from './dto/create-response.dto';
 
 @Injectable()
 export class UsersService {
@@ -10,8 +11,45 @@ export class UsersService {
         private readonly userRepository: Repository<User>,
     ) {}
 
-    async getUser(username: string): Promise<User> {
-        return this.userRepository.findOne({username: username});
+    async getUser(username: string) {
+        return this.userRepository.findOne(
+            {username},
+        );
+    }
+
+    async calculateIfBirth(username: string) {
+        const user = await this.getUser(username);
+        const result = this.checkIfBday(user.birthDate, this.getToday());
+        const response = new CreateResponseDTO();
+        if (result === 0 ) {
+            response.message = 'Hello, ' + username + '! Happy birthday!';
+        } else {
+            response.message = 'Hello, ' + username + '! Your birthday is in ' + result + ' day(s)';
+        }
+        return response;
+    }
+
+    checkIfBday(userDate: Date, today: Date) {
+        if (today.getMonth() === userDate.getMonth()) {
+            if (today.getDate() === userDate.getDate()) {
+                return 0;
+            }
+        }
+        let diff =  today.getDate() - userDate.getDate();
+        if (diff < 0) {
+            const year = new Date();
+            year.setMonth(11, 31);
+            diff = this.countDaysinYear(year) + diff;
+        }
+        return diff;
+    }
+
+    getToday() {
+        return new Date();
+    }
+
+    countDaysinYear(date) {
+        return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
     }
 
     async addExtraUser(user: User): Promise<any> {

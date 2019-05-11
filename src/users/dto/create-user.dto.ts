@@ -1,3 +1,3 @@
 export class CreateUserDTO {
-    readonly dateOfBirth: Date;
+    readonly dateOfBirth: string;
 }
