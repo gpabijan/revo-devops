@@ -1,5 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
-import {IsAlpha, MaxDate} from 'class-validator';
+import {IsAlpha} from 'class-validator';
 
 @Entity()
 export class User {

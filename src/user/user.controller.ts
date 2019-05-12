@@ -1,5 +1,5 @@
 import {Body, Controller, Get, HttpException, HttpStatus, Logger, Param, Put} from '@nestjs/common';
-import {UsersService} from './users.service';
+import {UserService} from './user.service';
 import {CreateUserDTO} from './dto/create-user.dto';
 import {User} from './entity/user.entity';
 import {Validator} from 'class-validator';
@@ -7,9 +7,9 @@ import {Validator} from 'class-validator';
 const validator = new Validator();
 
 @Controller('/')
-export class UsersController {
+export class UserController {
 
-    constructor(private usersService: UsersService) {}
+    constructor(private usersService: UserService) {}
 
     @Get('hello/:username')
     findUser(@Param('username') username) {

@@ -1,10 +1,18 @@
 {
   "type": "postgres",
-  "host": "localhost",
+  "host": "/cloudsql/revolut-devops:europe-west2:revolut-postgres",
   "port": 5432,
-  "username": "root",
-  "password": "toor",
+  "username": "postgres",
+  "password": "revolut",
   "database": "revolut",
-  "entities": ["src/**/*.entity{.ts,.js}"],
-  "synchronize": true
+  "entities": [
+    "dist/**/entity/*.js"
+  ],
+  "synchronize": true,
+  "cli": {
+    "entitiesDir": "dist/**/entity"
+  }
 }
+
+
+
