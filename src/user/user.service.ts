@@ -20,7 +20,7 @@ export class UserService {
     async calculateIfBirth(username: string) {
         const user = await this.getUser(username);
         if (!user) {
-            this.noUser('user: ' + username + 'not exist in database');
+            this.noUser('user: ' + username + ' not exist in database');
         }
         const result = this.checkIfBday(user.birthDate, this.getToday());
         const response = new CreateResponseDTO();
