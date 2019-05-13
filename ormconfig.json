@@ -4,7 +4,7 @@
   "port": 5432,
   "username": "ceybfpef",
   "password": "arQUpxpiDtzOES_fwW_3aGHgrZbxjtb2",
-  "database": "ceybfpef",
+  "database": "process.env.DATABASE_NAME",
   "entities": [
     "dist/**/entity/*.js"
   ],

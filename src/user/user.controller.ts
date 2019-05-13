@@ -13,6 +13,8 @@ export class UserController {
 
     @Get('hello/:username')
     findUser(@Param('username') username) {
+        Logger.log('THIS IS NEW MESSAGE');
+        Logger.log(process.env.NODE_ENV);
         return this.usersService.calculateIfBirth(username);
     }
 
