@@ -1,5 +1,5 @@
 {
-  "type": "process.env.DB2_TYPE",
+  "type": "postgres",
   "host": "process.env.DB2_HOST",
   "port": "process.env.DB2_PORT",
   "username": "process.env.DB2_USERNAME",
