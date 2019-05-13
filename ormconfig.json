@@ -1,16 +1,16 @@
 {
-  "type": "postgres",
-  "host": "/cloudsql/revolut-devops:europe-west2:revolut-postgres",
-  "port": 5432,
-  "username": "postgres",
-  "password": "revolut",
-  "database": "revolut",
+  "type": "process.env.DB2_TYPE",
+  "host": "process.env.DB2_HOST",
+  "port": "process.env.DB2_PORT",
+  "username": "process.env.DB2_USERNAME",
+  "password": "process.env.DB2_PASSWORD",
+  "database": "process.env.DB2_NAME",
   "entities": [
-    "dist/**/entity/*.js"
+    "process.env.DB2_ENTITIES"
   ],
   "synchronize": true,
   "cli": {
-    "entitiesDir": "dist/**/entity"
+    "entitiesDir": "process.env.DB2_ENTITIESDIER"
   }
 }
 
