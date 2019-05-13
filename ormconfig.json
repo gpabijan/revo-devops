@@ -1,16 +1,16 @@
 {
-  "type": "postgres",
-  "host": "manny.db.elephantsql.com",
-  "port": 5432,
-  "username": "ceybfpef",
-  "password": "arQUpxpiDtzOES_fwW_3aGHgrZbxjtb2",
-  "database": "process.env.DATABASE_NAME",
+  "type": "process.env.DB2_TYPE",
+  "host": "process.env.DB2_HOST",
+  "port": "process.env.DB2_PORT",
+  "username": "process.env.DB2_USERNAME",
+  "password": "process.env.DB2_PASSWORD",
+  "database": "process.env.DB2_NAME",
   "entities": [
-    "dist/**/entity/*.js"
+    "process.env.DB2_ENTITIES"
   ],
   "synchronize": true,
   "cli": {
-    "entitiesDir": "dist/**/entity"
+    "entitiesDir": "process.env.DB2_ENTITIESDIER"
   }
 }
 
