@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: revolut-devops-tool
+  labels:
+    app: revolut-devops-tool
+spec:
+  selector:
+    matchLabels:
+      app: revolut-devops-tool
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: revolut-devops-tool
+    spec:
+      containers:
+        - name: revolut-devops
+          image: eu.gcr.io/revolut-devops/app:latest
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: "development"
+            - name: KAFKA_TOPIC
+              value: "party"
+#            - name: KAFKA_CONNECTION
+#              valueFrom:
+#                configMapKeyRef:
+#                  name: kafka.connection
+#                  key: kafka_bootstrap_servers_sasl_plain
+#            - name: KAFKA_SASL_USERNAME
+#              valueFrom:
+#                secretKeyRef:
+#                  name: kafka-credentials
+#                  key: kafka_username
+#            - name: KAFKA_SASL_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: kafka-credentials
+#                  key: kafka_password
+          ports:
+            - name: http
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /_ah/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
