@@ -36,11 +36,6 @@ spec:
                 configMapKeyRef:
                   name: db2-connection
                   key: DB2_HOST
-            - name: DB2_TYPE
-              valueFrom:
-                configMapKeyRef:
-                  name: db2-connection
-                  key: DB2_TYPE
             - name: DB2_PORT
               valueFrom:
                 configMapKeyRef:
