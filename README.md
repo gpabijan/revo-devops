@@ -19,10 +19,6 @@ $ docker-compose up
 will create 2 separate containers: one 
 with DB and one with the application.
 
-### local development
-copy ```ormconfig_local.json``` to ```ormconfig.json```
-There is a problem with NestJS envs, that's why 
-it works like this.
 
 ## Test
 

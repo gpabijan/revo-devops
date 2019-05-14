@@ -2,25 +2,29 @@ version: '3'
 
 services:
 
-  # nestJS backend listening on port 3000
   backend:
-    build:
-      context: .
-      dockerfile: Dockerfile.local
+    build: ./
     volumes:
       - ./src/:/app/src
     ports:
       - 8080:8080
+    environment:
+      - DB2_TYPE=postgres
+      - DB2_USERNAME=root
+      - DB2_PASSWORD=toor
+      - DB2_HOST=postgres
+      - DB2_DATABASE=revolut
+      - DB2_ENTITIES=src/**/entity/*.ts
+      - DB2_ENTITIESDIER=src/**/entity
     links:
       - postgres
     command: npm run start:local
 
-  # mysql service listening on port 3306, username root, password empty
   postgres:
     container_name: PostgreTestsClock
     image: postgres:10-alpine
     ports:
-      - 5432:5432
+      - '5432:5432'
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=toor
