@@ -52,7 +52,10 @@ export class UserService {
     }
 
     countDaysinYear(date) {
-        return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+        return (Date.UTC(
+            date.getFullYear(),
+            date.getMonth(),
+            date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
     }
 
     async addExtraUser(user: User): Promise<any> {

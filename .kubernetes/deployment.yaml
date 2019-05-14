@@ -25,7 +25,7 @@ spec:
           imagePullPolicy: Always
           env:
             - name: NODE_ENV
-              value: "prod"
+              value: "production"
             - name: DB2_NAME
               valueFrom:
                 configMapKeyRef:
