@@ -1,6 +1,6 @@
 {
   "type": "postgres",
-  "host": "process.env.DB2_HOST",
+  "host": "`${env.DB2_HOST}`",
   "port": "5432",
   "username": "process.env.DB2_USERNAME",
   "password": "process.env.DB2_PASSWORD",
