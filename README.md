@@ -3,12 +3,6 @@
 
 Task for Revolut DevOps Role.
 
-## Installation
-
-```bash
-$ npm install
-```
-
 ## Running the app locally
 
 ### in Docker
@@ -30,7 +24,7 @@ $ npm run test
 
 ```
 ## Deployment to K8s
-to deploy the application, simply push code to ```k8s``` branch.
+to deploy the application, simply push code to ```master``` branch.
 Buddy Works will automatically start the build and deploy the 
 new pod.
 
@@ -39,9 +33,14 @@ new pod.
 2. Github send Webhook to BuddyWorks
 3. Buddy is building the docker container
  and push it to Google Repository
+ ![alte text](buddyworks.png)
 4. The last step of Buddy is to deploy
  new image/deployment on K8s cluster 
 5. K8s is rolling update new application with zero downtime\
 
 ![alt text](image.png)
 
+## Kubernetes
+
+App is using standard secrets and configmap from K8s resources:
+![alt_text](secrets_cm.png)
