@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: revolut-devops-tool
+  labels:
+    app: revolut-devops-tool
+spec:
+  selector:
+    matchLabels:
+      app: revolut-devops-tool
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: revolut-devops-tool
+    spec:
+      containers:
+        - name: revolut-devops
+          image: eu.gcr.io/revolut-devops/app:latest
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: DB2_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db2-connection
+                  key: DB2_DATABASE
+            - name: DB2_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db2-connection
+                  key: DB2_HOST
+            - name: DB2_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: db2-connection
+                  key: DB2_TYPE
+            - name: DB2_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: db2-connection
+                  key: DB2_PORT
+            - name: DB2_ENTITIES
+              valueFrom:
+                configMapKeyRef:
+                  name: db2-connection
+                  key: DB2_ENTITIES
+            - name: DB2_ENTITIESDIER
+              valueFrom:
+                configMapKeyRef:
+                  name: db2-connection
+                  key: DB2_ENTITIESDIER
+            - name: DB2_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db2-credentials
+                  key: DB2_USERNAME
+            - name: DB2_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db2-credentials
+                  key: DB2_PASSWORD
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /_ah/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1

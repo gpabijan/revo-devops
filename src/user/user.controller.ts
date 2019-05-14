@@ -13,6 +13,7 @@ export class UserController {
 
     @Get('hello/:username')
     findUser(@Param('username') username) {
+        Logger.log('Checking user: ' + username);
         return this.usersService.calculateIfBirth(username);
     }
 
