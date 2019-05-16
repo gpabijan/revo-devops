@@ -38,7 +38,7 @@ export class UserService {
                 return 0;
             }
         }
-        let diff =  today.getDate() - userDate.getDate();
+        let diff =  userDate.getDate() - today.getDate();
         if (diff < 0) {
             const year = new Date();
             year.setMonth(11, 31);
