@@ -44,3 +44,6 @@ new pod.
 
 App is using standard secrets and configmap from K8s resources:
 ![alt_text](secrets_cm.png)
+
+App is avalaible at:
+```http://35.234.128.102:8080/hello/```
